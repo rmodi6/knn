@@ -32,14 +32,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--dataset', dest='dataset_path', action='store', type=str, help='path to dataset')
-    parser.add_argument('--k', dest='k', action='store', type=int, help='k value for kNN', default='3')
+    parser.add_argument('--k', dest='k', action='store', type=int, help='k value for kNN', default=3)
+    parser.add_argument('--test_size', dest='test_size', action='store', type=float,
+                        help='size of test data in fraction (Default: 0.2)', default=0.2)
 
     args = parser.parse_args()
 
     df = pd.read_csv(args.dataset_path)
 
     X, y = df.iloc[:, :-1].values, df.iloc[:, -1].values
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=args.test_size)
 
     y_preds = predict(X_test, X_train, y_train, args.k)
     print('Accuracy: {:.2f}%'.format(accuracy(y_preds, y_test)))
