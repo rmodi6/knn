@@ -31,7 +31,8 @@ def accuracy(y_preds, y_test):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--dataset', dest='dataset_path', action='store', type=str, help='path to dataset')
+    parser.add_argument('--dataset', dest='dataset_path', action='store', type=str, help='path to dataset',
+                        required=True)
     parser.add_argument('--k', dest='k', action='store', type=int, help='k value for kNN', default=3)
     parser.add_argument('--test_size', dest='test_size', action='store', type=float,
                         help='size of test data in fraction (Default: 0.2)', default=0.2)
