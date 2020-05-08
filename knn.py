@@ -25,7 +25,7 @@ def predict(X_test, X_train, y_train, k):
 
 
 def accuracy(y_preds, y_test):
-    return np.sum(np.where(y_preds != y_test, 1, 0)) * 100 / len(y_test)
+    return np.sum(np.where(y_preds == y_test, 1, 0)) * 100 / len(y_test)
 
 
 if __name__ == '__main__':
