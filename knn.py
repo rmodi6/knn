@@ -64,6 +64,8 @@ if __name__ == '__main__':
     parser.add_argument('--k', dest='k', type=int, help='k value for kNN (Default: 3)', default=3)
     parser.add_argument('--test_size', dest='test_size', type=float,
                         help='size of test data in fraction (Default: 0.2)', default=0.2)
+    parser.add_argument('--random_state', dest='random_state', type=int,
+                        help='random state for train_test_split (Default: None)', default=None)
 
     args = parser.parse_args()
 
@@ -71,7 +73,7 @@ if __name__ == '__main__':
 
     X, y = df.iloc[:, :-1].values, df.iloc[:, -1].values
     # Split the data into training and test set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=args.test_size)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=args.test_size, random_state=args.random_state)
 
     # Predict labels for test data using knn
     y_preds = predict(X_test, X_train, y_train, args.k)
